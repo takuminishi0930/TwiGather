@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8">
+		<title>ツイギャザ</title>
+		<meta name="description" content="欲しいツイートだけ自動で集めるWEBアプリ">
+		<link rel="icon" type="image/png" href="../static/images/star-half-alt-solid.svg">
+		<link href="../static/css/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+	</head>
+	
+	<body>
+		<div id ="home" class="big-bg">
+			<div class="home-wrapper">
+				<!-- <h1><img class="logo" src="../static/images/logo.svg"></h1> -->
+				<!--ロゴイメージ-->
+				<div class="logo-wrapper">
+					<h1><i class="fas fa-star-half-alt"></i></h1>
+					<h1 class="logo-text">TwiGather</h1>
+				</div>
+				<!--ロゴイメージここまで-->
+				<h1 class="page-title">あなたに必要な<br>ツイートだけ届けます。</h1>
+				<div class="login-wrapper">
+					<form method="POST" action="/menu">
+						<div class="login-form">
+							<input class="login-username" type="text" name="u" title="username" placeholder="ユーザーネーム">
+							<input class="login-password" type="password" name="p" title="username" placeholder="パスワード">
+							<button class="login-button" type="submit">ログイン</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="../static/js/script.js"></script>
+	</body>
+</html>

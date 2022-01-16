@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">	
+    <head>
+        <head>
+            <meta charset="utf-8">
+			<title>ツイギャザ</title>
+			<meta name="description" content="欲しいツイートだけ自動で集めるWEBアプリ">
+            <link rel="icon" type="image/png" href="../static/images/star-half-alt-solid.svg">
+            <link href="../static/css/style.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+		</head>
+    <body>
+        <header class="page-header">
+			<div class="logo-wrapper">
+				<h1><i class="fas fa-star-half-alt"></i></h1>
+				<h1 class="logo-text">TwiGather</h1>
+			</div>
+		</header>
+
+		<div class="status">
+			<a>注目人物のツイート</a>
+			<a>ツイート数：{{ '%s' | format(len_df) }}</a>
+		</div>
+
+		<article class="lower">
+			<table class="tweet-tabel">				  
+				{% for i in record: %}
+				<tr id="tweet-box">
+					<td id="icon">
+						<a href="{{ '%s' | format(i[2]) }}" target="_blank" rel="noopener noreferrer">
+							<span class="fa-stack fa-lg twitter-circle-wrapper">
+								<i class="fas fa-circle fa-stack-2x twitter-circle"></i>
+								<i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+					</td>
+					<td id="user-name">
+						<div id="user-name-text">
+							{{ i[0] }}
+						</div>
+					</td>
+					<td id="date">{{ i[3] }}</td>
+					<td id="text">{{ i[1] }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</article>
+		
+		<div class="toolbar">
+			<!-- 昨日のツイートボタン -->
+			<div class="toolbar-item">
+				{% if isyesterday==True %}
+				<form method="POST" action="/menu">
+					<input type="hidden" name="q">
+					<input type="hidden" name="n" value="{{ '%s' | format(dt) }}">
+					<input type="hidden" name="y">
+					<button type="submit" class="toolbar-button">
+						<i class="fas fa-arrow-left"></i>
+					</button>
+				</form>
+				{% else %}
+				<button type="button" class="toolbar-button" id="not-button">
+					<i class="fas fa-arrow-left"></i>
+				</button>
+				{% endif %}
+			</div>
+			<!--検索-->
+			<div class="toolbar-item">
+				<a href="#search-modal">
+					<button type="button" class="toolbar-button search-button">
+						<i class="fas fa-search"></i>
+					</button>
+				</a>
+				<!--ボタンを押したら出現する--> 
+				<div class="modal" id="search-modal">
+					<form method="POST" action="/search" id="search-form">
+						<input class="search-text" type="text" name="q" placeholder="特定の単語が含まれたツイートを検索する"/>
+						<input type="hidden" name="n" value="{{ '%s' | format(dt) }}"/>
+							<button type="submit" form="search-form" class="toolbar-button-hidden">
+								<i class="fas fa-search"></i>
+							</button>
+					</form>
+				</div>
+			</div>
+			<!--単語の推移-->
+			<div class="toolbar-item">
+				<a href="#trans-modal">
+					<button type="button" class="toolbar-button trans-button">
+						<i class="fas fa-chart-line"></i>
+					</button>
+				</a>
+				<!--ボタンを押したら別ページに移動する--> 
+				<div class="modal" id="trans-modal">
+					<form method="POST" action="/trans" id="trans-form">
+						<input class="search-text" type="text" name="w" placeholder="単語の出現回数の推移を調べる"/>
+						<input type="hidden" name="n" value="{{ '%s' | format(dt) }}"/>
+							<button type="submit" form="trans-form" class="toolbar-button-hidden">
+								<i class="fas fa-chart-line"></i>
+							</button>
+					</form>
+				</div>
+			</div>
+			<!--単語の出現回数-->
+			<div class="toolbar-item">
+				<a href="#count-modal">
+					<button type="button" class="toolbar-button">
+						<i class="fas fa-signal"></i>
+					</button>
+				</a>
+				<!--回数のモーダルウインドウ-->
+				<div class="modal" id="count-modal">
+					<a href="#!"><img src="../static/images/count_word.png"></a>
+				</div>
+			</div>
+			<!--menuへ戻るバツボタン-->
+			<div class="toolbar-item">
+				<form method="POST" action="/menu">
+					<button type="submit" class="toolbar-button">
+						<input type="hidden" name="q">
+						<input type="hidden" name="n" value="{{ '%s' | format(dt) }}"/>
+						<i class="fas fa-times"></i>
+					</button>
+				</form>
+			</div>
+			<!-- ページトップへ戻るボタン -->
+			<div class="toolbar-item">
+				<button type="button" class="toolbar-button" id="scroll_top">
+					<i class="fas fa-arrow-up"></i>
+				</button>
+			</div>
+			<!-- 翌日のツイートボタン -->
+			<div class="toolbar-item">
+				{% if istomorrow==True %}
+				<form method="POST" action="/menu">
+						<input type="hidden" name="q">
+						<input type="hidden" name="n" value="{{ '%s' | format(dt) }}">
+						<input type="hidden" name="t">
+						<button type="submit" class="toolbar-button">
+							<i class="fas fa-arrow-right"></i>
+						</button>
+				</form>
+				{% else %}
+				<button type="button" class="toolbar-button" id="not-button">
+					<i class="fas fa-arrow-right"></i>
+				</button>
+				{% endif %}
+			</div>
+		</div>
+		
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="../static/js/script.js"></script>
+    </body>
+</html>

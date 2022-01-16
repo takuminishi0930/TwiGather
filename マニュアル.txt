@@ -1,0 +1,14 @@
+[webアプリ起動方法]
+cdコマンドでserach.pyのあるディレクトリまで移動。（TwiGather/app/search)
+「python3 search.py 2021 月 日付」を実行。
+cdコマンドでrun.pyがあるディレクトリまで移動。(TwiGather)
+「python3 run.py」を実行。
+ブラウザで「http://127.0.0.1:5000」にアクセス。
+
+[webアプリ終了方法]
+端末上で「Ctrl+C」を押す。
+
+[よくあるエラー]
+webアプリ起動後、ログインしたらエラーが出た。
+ー＞「Ctrl+C」でwebアプリを終了させてから、「python3 TwiGather/app/search/search.py 2021 一日前の日付」を実行してみてください。
+理由：ログイン後は「一日前のツイート」を表示するようにしてあるので、それが無いとエラーになります。

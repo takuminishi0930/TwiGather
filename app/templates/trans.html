@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">	
+    <head>
+        <head>
+            <meta charset="utf-8">
+            <title>ツイギャザ</title>
+            <meta name="description" content="欲しいツイートだけ自動で集めるWEBアプリ">
+            <link rel="icon" type="image/svg" href="../static/images/star-half-alt-solid.svg">
+            <link href="../static/css/style.css" rel="stylesheet">
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+        </head>
+<body>
+    <header class="page-header">
+        <div class="logo-wrapper">
+            <h1><i class="fas fa-star-half-alt"></i></h1>
+            <h1 class="logo-text">TwiGather</h1>
+        </div>
+    </header>
+
+    <form method="POST" action="/menu" id="temp-trans-form">
+        <input type="hidden" name="q">
+        <input type="hidden" name="n" value="{{ '%s' | format(dt) }}"/>
+    </form>
+    <div id="trans-modal2">
+        <button type="submit" form="temp-trans-form" id="trans-modal-button">
+            <img src="../static/images/trans_word.png">
+        </button>
+    </div>
+</body>
+</html>
